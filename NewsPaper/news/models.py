@@ -33,8 +33,8 @@ class UserProfile(models.Model):
 
 # У меня такая альтернатива категориям, каждый сможет создавать саб хаб, в одном саб хабе может быть много постов
 class SubHub(models.Model):
-    name = models.CharField(max_length=128, unique=True)
-    description = models.TextField
+    name = models.CharField(max_length=65, unique=True)
+    description = models.TextField(max_length=256)
     post_count = models.IntegerField(default=0)
 
 
