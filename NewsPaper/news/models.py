@@ -33,7 +33,7 @@ class UserProfile(models.Model):
 
 # У меня такая альтернатива категориям, каждый сможет создавать саб хаб, в одном саб хабе может быть много постов
 class SubHub(models.Model):
-    name = models.CharField(max_length=65, unique=True)
+    name = models.CharField(max_length=128, unique=True)
     description = models.TextField(max_length=256)
     post_count = models.IntegerField(default=0)
 
@@ -42,8 +42,8 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     subhub = models.ForeignKey(SubHub, on_delete=models.CASCADE)
     rating = models.IntegerField(default=0)
-    content = models.TextField
-    header = models.TextField(max_length=256)
+    content = models.TextField(max_length=1024)
+    header = models.TextField(max_length=128)
     date = models.DateField(auto_now_add=True)
     ARTICLE = "AR"
     NEWS = "NE"
@@ -78,15 +78,15 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET('DELETED'))
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     rating = models.IntegerField(default=0)
-    content = models.TextField
+    content = models.TextField(max_length=1024)
     date = models.DateField(auto_now_add=True)
 
     def like(self):
-        self.rating = + 1
+        self.rating += 1
         self.save()
 
     def dislike(self):
-        self.rating = - 1
+        self.rating -= 1
         self.save()
 
     def get_rating(self):
