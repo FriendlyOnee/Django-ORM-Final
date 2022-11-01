@@ -63,11 +63,11 @@ class Post(models.Model):
         return self.content[0:128]
 
     def like(self):
-        self.rating = + 1
+        self.rating += 1
         self.save()
 
     def dislike(self):
-        self.rating = - 1
+        self.rating -= 1
         self.save()
 
     def get_rating(self):
