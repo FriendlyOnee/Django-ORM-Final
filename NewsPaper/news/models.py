@@ -11,6 +11,7 @@ class UserProfile(models.Model):
     birthdate = models.DateField(null=True, blank=True)
     post_rating = models.IntegerField(default=0)
     comment_rating = models.IntegerField(default=0)
+    date_joined = models.DateTimeField(auto_now_add=True)
 
     def update_post_rating(self):
         self.post_rating = self.rating_calc('Post')
