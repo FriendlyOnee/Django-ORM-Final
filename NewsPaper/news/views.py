@@ -5,11 +5,11 @@ from .models import Post
 class PostsList(ListView):
     model = Post
     ordering = 'rating'
-    template_name = 'posts.html'
+    template_name = 'flatpages/posts.html'
     context_object_name = 'posts'
 
 
 class PostDetail(DetailView):
     model = Post
-    template_name = 'post.html'
+    template_name = 'flatpages/post.html'
     context_object_name = 'post'

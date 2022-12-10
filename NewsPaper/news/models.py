@@ -74,6 +74,9 @@ class Post(models.Model):
     def get_rating(self):
         return self.rating
 
+    def __str__(self):
+        return f'{self.header}: {self.content}'
+
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET('DELETED'))
