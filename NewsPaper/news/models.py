@@ -31,12 +31,18 @@ class UserProfile(models.Model):
             rating = list(related_posts.values_list('rating', flat=True))
             return sum(rating)
 
+    def __str__(self):
+        return self.user.username
+
 
 # У меня такая альтернатива категориям, каждый сможет создавать саб хаб, в одном саб хабе может быть много постов
 class SubHub(models.Model):
     name = models.CharField(max_length=128, unique=True)
     description = models.TextField(max_length=256)
     post_count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.name}: {self.description[0:64]}'
 
 
 class Post(models.Model):
@@ -61,7 +67,7 @@ class Post(models.Model):
     )
 
     def preview(self):
-        return self.content[0:128]
+        return self.content[0:64]
 
     def like(self):
         self.rating += 1
@@ -75,7 +81,7 @@ class Post(models.Model):
         return self.rating
 
     def __str__(self):
-        return f'{self.header}: {self.content}'
+        return f'{self.header}: {self.content[0:64]}'
 
 
 class Comment(models.Model):
@@ -95,4 +101,7 @@ class Comment(models.Model):
 
     def get_rating(self):
         return self.rating
+
+    def __str__(self):
+        return f'{self.post}: {self.content[0:64]}'
 # Create your models here.
