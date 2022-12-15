@@ -4,7 +4,7 @@ from .models import Post
 
 class PostsList(ListView):
     model = Post
-    ordering = 'rating'
+    ordering = '-date'
     template_name = 'flatpages/posts.html'
     context_object_name = 'posts'
 

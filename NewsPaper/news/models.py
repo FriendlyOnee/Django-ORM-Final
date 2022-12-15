@@ -67,7 +67,10 @@ class Post(models.Model):
     )
 
     def preview(self):
-        return self.content[0:64]
+        if len(self.content) >= 64:
+            return f'{self.content[0:64]}...'
+        else:
+            return self.content
 
     def like(self):
         self.rating += 1
